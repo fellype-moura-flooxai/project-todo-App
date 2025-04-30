@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
+
 import promises from 'redux-promise'
+import multi from 'redux-multi'
+import thunk from 'redux-thunk'
 
 import App from './main/app';
 import reducers from './main/reducers'
@@ -13,7 +16,7 @@ if (devTools) {
     console.log('devtools')
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 }
-const store = applyMiddleware(promises)(createStore)(reducers, devTools)
+const store = applyMiddleware(thunk, multi, promises)(createStore)(reducers, devTools)
 
 ReactDOM.render(
     <Provider store={store}>
